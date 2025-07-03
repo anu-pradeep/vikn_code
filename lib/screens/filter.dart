@@ -54,14 +54,28 @@ class _FilterScreenState extends State<FilterScreen> {
     return Scaffold(
       backgroundColor: CustomColors.blackColor,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: CustomColors.blackColor,
         elevation: 0,
-        leading: BackButton(color: CustomColors.whiteColor,),
-        title: Text('Filters', style: TextStyle(color: CustomColors.whiteColor,fontFamily: 'PoppinsRegular',fontSize: 20)),
+        title: Text(
+          'Filters',
+          style: TextStyle(
+            color: CustomColors.whiteColor,
+            fontFamily: 'PoppinsRegular',
+            fontSize: 20,
+          ),
+        ),
         actions: [
-         Image.asset('assets/images/eye.png'),
+          Image.asset('assets/images/eye.png'),
           SizedBox(width: 12),
-          Text('filter',style: TextStyle(color: CustomColors.blueColor,fontFamily: 'PoppinsRegular',fontSize: 15),)
+          Text(
+            'filter',
+            style: TextStyle(
+              color: CustomColors.blueColor,
+              fontFamily: 'PoppinsRegular',
+              fontSize: 15,
+            ),
+          ),
         ],
       ),
       body: Padding(
@@ -69,11 +83,10 @@ class _FilterScreenState extends State<FilterScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Month Dropdown
             Center(
-              child: SizedBox(width: 150,
-                child:
-                CustomSearchableDropdown(
+              child: SizedBox(
+                width: 150,
+                child: CustomSearchableDropdown(
                   hintText: 'Select Month',
                   items: ['This Month', 'Last Month', 'Custom'],
                   selectedItem: selectedMonth,
@@ -86,8 +99,6 @@ class _FilterScreenState extends State<FilterScreen> {
               ),
             ),
             SizedBox(height: 16),
-
-            // Date Pickers
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -101,13 +112,20 @@ class _FilterScreenState extends State<FilterScreen> {
                     ),
                     child: Row(
                       children: [
-                        Icon(Icons.calendar_today, color: CustomColors.blueColor, size: 18),
+                        Icon(
+                          Icons.calendar_today,
+                          color: CustomColors.blueColor,
+                          size: 18,
+                        ),
                         SizedBox(width: 08),
                         Text(
                           startDate != null
                               ? "${startDate!.day}/${startDate!.month}/${startDate!.year}"
                               : "Start Date",
-                          style: TextStyle(color: CustomColors.whiteColor,fontFamily: 'PoppinsRegular'),
+                          style: TextStyle(
+                            color: CustomColors.whiteColor,
+                            fontFamily: 'PoppinsRegular',
+                          ),
                         ),
                       ],
                     ),
@@ -124,13 +142,20 @@ class _FilterScreenState extends State<FilterScreen> {
                     ),
                     child: Row(
                       children: [
-                        Icon(Icons.calendar_today, color: CustomColors.blueColor, size: 18),
+                        Icon(
+                          Icons.calendar_today,
+                          color: CustomColors.blueColor,
+                          size: 18,
+                        ),
                         SizedBox(width: 08),
                         Text(
                           endDate != null
                               ? "${endDate!.day}/${endDate!.month}/${endDate!.year}"
                               : "End Date",
-                          style: TextStyle(color: CustomColors.whiteColor,fontFamily: 'PoppinsRegular'),
+                          style: TextStyle(
+                            color: CustomColors.whiteColor,
+                            fontFamily: 'PoppinsRegular',
+                          ),
                         ),
                       ],
                     ),
@@ -140,7 +165,6 @@ class _FilterScreenState extends State<FilterScreen> {
             ),
             SizedBox(height: 16),
 
-            // Status Toggle
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: ['Pending', 'Invoiced', 'Cancelled'].map((status) {
@@ -159,9 +183,11 @@ class _FilterScreenState extends State<FilterScreen> {
                       child: Text(
                         status,
                         style: TextStyle(
-                          color: isSelected ? CustomColors.whiteColor : Colors.white70,
+                          color: isSelected
+                              ? CustomColors.whiteColor
+                              : Colors.white70,
                           fontWeight: FontWeight.bold,
-                          fontFamily: 'PoppinsRegular'
+                          fontFamily: 'PoppinsRegular',
                         ),
                       ),
                     ),
@@ -187,8 +213,11 @@ class _FilterScreenState extends State<FilterScreen> {
               children: [
                 Chip(
                   backgroundColor: darkCard,
-                  label: Text(selectedCustomer, style: TextStyle(color: CustomColors.whiteColor,)),
-                  deleteIcon: Icon(Icons.close, color: CustomColors.blueColor,),
+                  label: Text(
+                    selectedCustomer,
+                    style: TextStyle(color: CustomColors.whiteColor),
+                  ),
+                  deleteIcon: Icon(Icons.close, color: CustomColors.blueColor),
                   onDeleted: () {
                     setState(() {
                       selectedCustomer = '';
@@ -196,7 +225,7 @@ class _FilterScreenState extends State<FilterScreen> {
                   },
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vikn_code/api_path/api_class.dart';
 
 class AuthProvider extends ChangeNotifier {
   String? token;
@@ -9,7 +11,7 @@ class AuthProvider extends ChangeNotifier {
   String? errorMessage;
 
   Future<bool> login(String username, String password) async {
-    final url = Uri.parse('https://api.accounts.vikncodes.com/api/v1/users/login');
+    final url = Uri.parse(ApiClass.loginApi);
 
     try {
       final response = await http.post(
@@ -33,27 +35,19 @@ class AuthProvider extends ChangeNotifier {
           final prefs = await SharedPreferences.getInstance();
           await prefs.setString('token', token!);
           await prefs.setString('userID', userID!);
-          print('token:$token');
-          print(username);
-          print(password);
-          print('userId: $userID');
-
           errorMessage = null;
           notifyListeners();
           return true;
         } else {
           errorMessage = responseData['error'] ?? "Login failed";
-          print("Missing 'access' or 'user_id' in response: ${response.body}");
           return false;
         }
       } else {
         errorMessage = responseData['error'] ?? "Login failed";
-        print("Login failed: ${response.statusCode} - ${response.body}");
         return false;
       }
     } catch (e) {
       errorMessage = "Something went wrong. Please try again.";
-      print("Login exception: $e");
       return false;
     }
   }

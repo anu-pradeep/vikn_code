@@ -6,6 +6,7 @@ import 'package:vikn_code/screens/login.dart';
 void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => AuthProvider()),
+
   ],
       child:   MyApp()
   ) );

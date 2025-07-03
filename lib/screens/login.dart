@@ -81,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 const SizedBox(height: 40),
-        
+
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.white10,
@@ -154,7 +154,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 const SizedBox(height: 16),
-        
+
                 Align(
                   alignment: Alignment.center,
                   child: TextButton(
@@ -168,71 +168,73 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-        
+
                 const SizedBox(height: 16),
-        
-                ElevatedButton(
-                  onPressed: () async {
-                    final username = usernameController.text.trim();
-                    final password = passwordController.text.trim();
-        
-                    if (username.isEmpty || password.isEmpty) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            'Please enter both username and password',
-                            style: TextStyle(fontFamily: 'PoppinsRegular'),
+
+                Padding(
+                  padding: const EdgeInsets.only(left: 110,right: 110),
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      final username = usernameController.text.trim();
+                      final password = passwordController.text.trim();
+
+                      if (username.isEmpty || password.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'Please enter both username and password',
+                              style: TextStyle(fontFamily: 'PoppinsRegular'),
+                            ),
                           ),
-                        ),
-                      );
-                      return;
-                    }
-        
-                    if (kDebugMode) {
-                      print('Trying login with → username: $username, password: $password');
-                    }
-        
-                    bool loggedIn = await authProvider.login(username, password);
-                    if (loggedIn) {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (_) => DashboardScreen()),
-                      );
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            authProvider.errorMessage ?? 'Login failed',
-                            style: TextStyle(fontFamily: 'PoppinsRegular'),
+                        );
+                        return;
+                      }
+
+                      if (kDebugMode) {
+                        print('Trying login with → username: $username, password: $password');
+                      }
+
+                      bool loggedIn = await authProvider.login(username, password);
+                      if (loggedIn) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (_) => DashboardScreen()),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              authProvider.errorMessage ?? 'Login failed',
+                              style: TextStyle(fontFamily: 'PoppinsRegular'),
+                            ),
                           ),
-                        ),
-                      );
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: CustomColors.blueColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                      fixedSize: const Size(80, 50)
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        'Sign in',
-                        style: TextStyle(fontFamily: 'PoppinsRegular',color: CustomColors.whiteColor),
+                        );
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: CustomColors.blueColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(40),
                       ),
-                      SizedBox(width: 8),
-                      Icon(Icons.arrow_forward,color: CustomColors.whiteColor,),
-                    ],
+                      // padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'Sign in',
+                          style: TextStyle(fontFamily: 'PoppinsRegular',color: CustomColors.whiteColor),
+                        ),
+                        SizedBox(width: 8),
+                        Icon(Icons.arrow_forward,color: CustomColors.whiteColor,),
+                      ],
+                    ),
                   ),
                 ),
-        
-        
+
+
                 const SizedBox(height: 140),
-        
-                // Sign up text
+                
                 Center(
                   child: Column(
                     children: [
